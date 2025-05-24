@@ -23,10 +23,23 @@ const adminRoutes = require("./routes/admin.routes");
 const cloudinaryRoutes = require("./routes/cloudinary.routes");
 
 // middleware
-app.use(cors());
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
+
+
+const cors = require("cors");
+app.use(cors({
+  origin: ["http://localhost:3000", 'https://shofy-beauty-cosmetics-ecommerce.vercel.app/' ], // या "*" for all origins (not secure for production)
+  credentials: true,
+}));
+
+app.use(express.json());
+
+// Your routes
+app.post("/api/user/signup", (req, res) => {
+  // signup logic
+});
 
 // connect database
 connectDB();
